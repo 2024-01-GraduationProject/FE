@@ -22,21 +22,6 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  {
-    /*const handleSocialLogin = (provider) => {
-    switch (provider) {
-      case "google":
-        googleLoginRef.current.triggerGoogleLogin();
-        break;
-      case "kakao":
-        kakaoLoginRef.current.loginWithKakao();
-        break;
-      default:
-        break;
-    }
-  };*/
-  }
-
   // 로그인 요청 핸들러
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -114,24 +99,7 @@ const Login = () => {
               </button>
             </div>
           </form>
-
-          {/*<div className="find_userdata">
-            <button className="find_email">아이디 찾기</button> |{" "}
-            <button className="find_pw">비밀번호 찾기</button> */}
         </div>
-
-        {/*<div className="social">
-            <button onClick={() => handleSocialLogin("google")}>
-              <img src={google} alt="구글"></img>
-            </button>
-
-            <button onClick={() => handleSocialLogin("kakao")}>
-              <img src={kakao} alt="카카오"></img>
-            </button>
-          </div>
-        </div>
-        <KakaoLogin ref={kakaoLoginRef} />
-        <GoogleLogin ref={googleLoginRef} />*/}
       </div>
     </>
   );
