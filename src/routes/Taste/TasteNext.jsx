@@ -24,7 +24,7 @@ const TasteNext = () => {
     <>
       <header id="header" role="banner">
         <div className="header__inner">
-          <span className="header__logo" onClick={() => handleNavigate("/")}>
+          <span className="header__logo" onClick={() => navigate("/")}>
             <img src={logo} alt="로고"></img>
           </span>
         </div>
