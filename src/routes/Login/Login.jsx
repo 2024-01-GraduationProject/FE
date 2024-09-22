@@ -11,9 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loginCheck, setLoginCheck] = useState(false);
 
-  const kakaoLoginRef = useRef();
-  const googleLoginRef = useRef();
-
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -45,10 +42,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post("/login", {
-        email: email,
-        password: password,
-      });
+      const response = await api.post(
+        `${process.env.REACT_APP_API_URL}/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
 
       if (response.status === 200) {
         // 로그인 성공 시

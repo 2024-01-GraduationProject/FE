@@ -22,7 +22,9 @@ const MyPage = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await api.get("/user-data");
+        const response = await api.get(
+          `${process.env.REACT_APP_API_URL}/user-data`
+        );
         setUser(response.data);
       } catch (error) {
         console.error("데이터 불러오기 실패: ", error);

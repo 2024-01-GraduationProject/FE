@@ -12,7 +12,9 @@ const NewBook = () => {
     // 컴포넌트가 마운트될 때 책 목록을 가져옴
     const fetchBooks = async () => {
       try {
-        const response = await api.get("/books");
+        const response = await api.get(
+          `${process.env.REACT_APP_API_URL}/books`
+        );
         // 책 목록을 출판일 기준으로 내림차순 정렬
         const sortedBooks = response.data
           .sort(
@@ -45,7 +47,8 @@ const NewBook = () => {
   return (
     <div className="booklist-wrapper">
       <div className="main-booklist-component">
-      <strong className="highlightNew">New! </strong> <span class="groupingText">새로 들어온 책</span>
+        <strong className="highlightNew">New! </strong>{" "}
+        <span class="groupingText">새로 들어온 책</span>
       </div>
 
       <div className="newbook-list-wrapper">
@@ -57,11 +60,11 @@ const NewBook = () => {
               onClick={() => goToBookDetail(book.id)}
             >
               <div className="book-cover-wrapper">
-              <img
-                src={book.coverImageUrl}
-                alt={book.title}
-                className="book-cover"
-              />
+                <img
+                  src={book.coverImageUrl}
+                  alt={book.title}
+                  className="book-cover"
+                />
               </div>
               <div className="book-details">
                 <h3 className="book-title">{book.title}</h3>

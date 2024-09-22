@@ -21,7 +21,9 @@ const RecommendBook = () => {
     const fetchUserData = async () => {
       try {
         // 닉네임 가져오기
-        const nicknameResponse = await api.get("/user-nickname");
+        const nicknameResponse = await api.get(
+          `${process.env.REACT_APP_API_URL}/user-nickname`
+        );
         setNickname(nicknameResponse.data);
       } catch (error) {
         alert("사용자 데이터를 가져오는 중 오류가 발생했습니다.");
@@ -31,7 +33,9 @@ const RecommendBook = () => {
     const fetchRecommendedBooks = async () => {
       try {
         // 추천 도서 가져오기
-        const booksResponse = await api.get("/recommend/userTaste");
+        const booksResponse = await api.get(
+          `${process.env.REACT_APP_API_URL}/recommend/userTaste`
+        );
         const selectedBooks = booksResponse.data;
         setBooks(selectedBooks);
       } catch (err) {

@@ -67,7 +67,10 @@ const Intro = () => {
       setIsEmailAvailable(false);
     } else {
       try {
-        const response = await api.post("/validate-email", { email });
+        const response = await api.post(
+          `${process.env.REACT_APP_API_URL}/validate-email`,
+          { email }
+        );
 
         if (response.data.isDuplicate) {
           setEmailError("이미 사용 중인 이메일입니다.");
@@ -187,8 +190,7 @@ const Intro = () => {
         <div className="section-box">
           <h2>전자책 도서관의 새로운 경험</h2>
           <p>
-            책을 읽고 부기와의 대화를 통해 더욱 깊은 독서의 즐거움을
-            느껴보세요!
+            책을 읽고 부기와의 대화를 통해 더욱 깊은 독서의 즐거움을 느껴보세요!
           </p>
           {/* 이미지 슬라이드 */}
           <div className="image-balloon-container">
