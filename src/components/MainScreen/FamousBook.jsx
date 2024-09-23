@@ -57,6 +57,11 @@ const FamousBook = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  // userData가 null일 경우를 처리
+  if (!userData) {
+    return <p>사용자 데이터를 불러오는 데 실패했습니다.</p>;
+  }
+
   const { age, gender } = userData;
 
   const goToBookDetail = (id) => {
