@@ -16,7 +16,7 @@ const BookCategory = () => {
       try {
         // 해당 카테고리의 책 목록을 가져오기
         const booksResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_URL}/books/category/${categoryName}`
+          `${process.env.REACT_APP_SERVER_PROXY}/books/category/${categoryName}`
         );
         if (booksResponse.status !== 200) {
           throw new Error(

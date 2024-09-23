@@ -83,7 +83,7 @@ const Join = () => {
       // 닉네임 중복 확인 API 호출
       try {
         const response = await api.post(
-          `${process.env.REACT_APP_SERVER_URL}/validate-nickname`,
+          `${process.env.REACT_APP_SERVER_PROXY}/validate-nickname`,
           { nickname }
         );
 
@@ -146,7 +146,7 @@ const Join = () => {
     if (passwordCheckHandler(password)) {
       try {
         const response = await api.post(
-          `${process.env.REACT_APP_SERVER_URL}/register`,
+          `${process.env.REACT_APP_SERVER_PROXY}/register`,
           {
             email,
             password,

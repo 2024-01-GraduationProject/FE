@@ -17,7 +17,7 @@ const CompletedBoogi = () => {
     // 사용자 답변 조회 API 호출
     api
       .get(
-        `${process.env.REACT_APP_SERVER_URL}/boogi/answers/${userId}/${bookId}`
+        `${process.env.REACT_APP_SERVER_PROXY}/boogi/answers/${userId}/${bookId}`
       )
       .then((response) => {
         // "" 따옴표 안의 내용을 제거하는 함수
@@ -44,7 +44,7 @@ const CompletedBoogi = () => {
 
     // 책 정보 조회 API 호출
     api
-      .get(`${process.env.REACT_APP_SERVER_URL}/books/${bookId}`)
+      .get(`${process.env.REACT_APP_SERVER_PROXY}/books/${bookId}`)
       .then((response) => {
         setBookTitle(response.data.title); // 책 제목 설정
         setBookAuthor(response.data.author); // 책 저자 설정

@@ -22,7 +22,7 @@ const RecommendBook = () => {
       try {
         // 닉네임 가져오기
         const nicknameResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_URL}/user-nickname`
+          `${process.env.REACT_APP_SERVER_PROXY}/user-nickname`
         );
         setNickname(nicknameResponse.data);
       } catch (error) {
@@ -34,7 +34,7 @@ const RecommendBook = () => {
       try {
         // 추천 도서 가져오기
         const booksResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_URL}/recommend/userTaste`
+          `${process.env.REACT_APP_SERVER_PROXY}/recommend/userTaste`
         );
         const selectedBooks = booksResponse.data;
         setBooks(selectedBooks);

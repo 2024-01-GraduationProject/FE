@@ -21,7 +21,7 @@ const BestBook = () => {
       try {
         // 추천 도서 가져오기
         const booksResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_URL}/books/best`
+          `${process.env.REACT_APP_SERVER_PROXY}/books/best`
         );
         const bestBooks = booksResponse.data;
         setBestBooks(bestBooks);
