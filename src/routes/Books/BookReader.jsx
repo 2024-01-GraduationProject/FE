@@ -155,14 +155,14 @@ const BookReader = () => {
             try {
               // 현재 읽고 있는 책의 데이터 가져오기
               const readingResponse = await api.get(
-                `${process.env.REACT_APP_API_URL}/bookshelf/reading`,
+                `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/reading`,
                 {
                   params: { userId },
                 }
               );
               // 독서 완료 중 lastReadPage가 100이 아닌 책 가져오기
               const completedResponse = await api.get(
-                `${process.env.REACT_APP_API_URL}/bookshelf/completed`,
+                `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completed`,
                 {
                   params: { userId },
                 }
@@ -318,7 +318,7 @@ const BookReader = () => {
           const lastReadPage = progress;
 
           const response = await api.put(
-            `${process.env.REACT_APP_API_URL}/bookshelf/completeBook`,
+            `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completeBook`,
             null,
             {
               params: {
@@ -359,7 +359,7 @@ const BookReader = () => {
         const lastReadPage = (progress / 100) * 100;
 
         const url = new URL(
-          `${process.env.REACT_APP_API_URL}/bookshelf/completeBook`,
+          `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completeBook`,
           window.location.origin
         );
         url.searchParams.append("userId", userId);
@@ -385,7 +385,7 @@ const BookReader = () => {
         const lastReadPage = (progress / 100) * 100;
         try {
           await api.put(
-            `${process.env.REACT_APP_API_URL}/bookshelf/completeBook`,
+            `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completeBook`,
             null,
             {
               params: {
