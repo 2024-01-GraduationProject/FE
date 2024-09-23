@@ -20,7 +20,7 @@ const FamousBook = () => {
     const fetchUserData = async () => {
       try {
         // API 호출
-        const response = await api.get(`/user-data`, {});
+        const response = await api.get(`/user-data`);
 
         // 사용자 데이터 설정
         setUserData(response.data);
