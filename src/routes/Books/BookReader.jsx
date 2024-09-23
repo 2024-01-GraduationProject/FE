@@ -170,6 +170,7 @@ const BookReader = () => {
 
                   if (cfi) {
                     setLastReadCFI(cfi); // CFI를 상태에 저장
+                    await newRendition.display(cfi); // 마지막 읽은 페이지로 이동
                   } else {
                     console.warn("Invalid CFI generated.");
                   }
