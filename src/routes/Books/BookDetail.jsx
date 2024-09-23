@@ -19,9 +19,7 @@ const BookDetail = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_URL}/user-data`
-        );
+        const userResponse = await api.get(`/user-data`);
         setUserId(userResponse.data.userId); // 사용자 ID 저장
       } catch (err) {
         setError("사용자 데이터를 가져오는 데 실패했습니다.");
