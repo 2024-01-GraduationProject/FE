@@ -35,7 +35,7 @@ const BookReader = () => {
     const fetchUserData = async () => {
       try {
         const userResponse = await api.get(
-          `${process.env.REACT_APP_API_URL}/user-data`
+          `${process.env.REACT_APP_SERVER_PROXY}/user-data`
         );
         setUserId(userResponse.data.userId); // 사용자 ID 저장
       } catch (err) {
@@ -51,7 +51,7 @@ const BookReader = () => {
     const fetchBook = async () => {
       try {
         const response = await api.get(
-          `${process.env.REACT_APP_API_URL}/books/${bookId}/content`,
+          `${process.env.REACT_APP_SERVER_PROXY}/books/${bookId}/content`,
           {
             responseType: "arraybuffer",
             headers: { Accept: "application/epub+zip" },
@@ -59,7 +59,7 @@ const BookReader = () => {
         );
 
         const bookDetailResponse = await api.get(
-          `${process.env.REACT_APP_API_URL}/books/${bookId}`
+          `${process.env.REACT_APP_SERVER_PROXY}/books/${bookId}`
         );
         setBookTitle(bookDetailResponse.data.title);
         setBookAuthor(bookDetailResponse.data.author);

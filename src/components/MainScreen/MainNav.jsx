@@ -13,7 +13,7 @@ const MainNav = () => {
     const fetchCategories = async () => {
       try {
         const response = await api.get(
-          `${process.env.REACT_APP_API_URL}/categories`
+          `${process.env.REACT_APP_SERVER_PROXY}/categories`
         );
         setCategoryOptions(response.data);
       } catch (error) {

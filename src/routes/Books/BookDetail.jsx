@@ -20,7 +20,7 @@ const BookDetail = () => {
     const fetchUserData = async () => {
       try {
         const userResponse = await api.get(
-          `${process.env.REACT_APP_API_URL}/user-data`
+          `${process.env.REACT_APP_SERVER_PROXY}/user-data`
         );
         setUserId(userResponse.data.userId); // 사용자 ID 저장
       } catch (err) {
@@ -41,7 +41,7 @@ const BookDetail = () => {
       try {
         // 책 정보를 가져오기
         const bookResponse = await api.get(
-          `${process.env.REACT_APP_API_URL}/books/${bookId}`
+          `${process.env.REACT_APP_SERVER_PROXY}/books/${bookId}`
         );
         setBook(bookResponse.data);
 
@@ -66,7 +66,7 @@ const BookDetail = () => {
     try {
       // 새로운 북마크 목록 조회 엔드포인트
       const bookmarkResponse = await api.get(
-        `${process.env.REACT_APP_API_URL}/bookmarks/list`,
+        `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/list`,
         {
           params: { userId },
         }
@@ -87,7 +87,7 @@ const BookDetail = () => {
   const checkDownloadStatus = async () => {
     try {
       const readingResponse = await api.get(
-        `${process.env.REACT_APP_API_URL}/bookshelf/reading`,
+        `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/reading`,
         {
           params: { userId },
         }
@@ -119,7 +119,7 @@ const BookDetail = () => {
       // 다운로드 누르면 '독서 중'에 저장
       // URL에 쿼리 파라미터로 userId, bookId, startDate를 포함
       const url = `${
-        process.env.REACT_APP_API_URL
+        process.env.REACT_APP_SERVER_PROXY
       }/bookshelf/add-to-reading?userId=${encodeURIComponent(
         userId
       )}&bookId=${encodeURIComponent(bookId)}&startDate=${encodeURIComponent(
@@ -151,7 +151,7 @@ const BookDetail = () => {
 
     try {
       await api.post(
-        `${process.env.REACT_APP_API_URL}/bookmarks/addBook`,
+        `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/addBook`,
         null,
         {
           params: { userId, bookId: bookId },
@@ -170,9 +170,12 @@ const BookDetail = () => {
     }
 
     try {
-      await api.delete(`${process.env.REACT_APP_API_URL}/bookmarks/remove`, {
-        params: { userId, bookId: bookId },
-      });
+      await api.delete(
+        `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/remove`,
+        {
+          params: { userId, bookId: bookId },
+        }
+      );
       setIsFavorite(false);
     } catch (error) {
       setError("즐겨찾기 제거에 실패했습니다.");

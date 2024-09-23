@@ -23,7 +23,7 @@ const MyPage = () => {
     const fetchUserData = async () => {
       try {
         const response = await api.get(
-          `${process.env.REACT_APP_API_URL}/user-data`
+          `${process.env.REACT_APP_SERVER_PROXY}/user-data`
         );
         setUser(response.data);
       } catch (error) {
