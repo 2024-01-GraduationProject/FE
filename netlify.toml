@@ -5,6 +5,12 @@ status = 200
 force = true
 
 [[redirects]]
+  from = "/books/*/content"
+  to = "http://43.201.64.218:8080/books/:splat/content"
+  status = 200
+  force = true
+  
+[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
