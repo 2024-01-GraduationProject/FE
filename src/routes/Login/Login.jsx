@@ -27,13 +27,10 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/login`,
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const response = await api.post(`/login`, {
+        email: email,
+        password: password,
+      });
 
       if (response.status === 200) {
         // 로그인 성공 시

@@ -12,9 +12,7 @@ const MainNav = () => {
     // 책 카테고리 데이터 가져오기
     const fetchCategories = async () => {
       try {
-        const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/categories`
-        );
+        const response = await api.get(`/categories`);
         setCategoryOptions(response.data);
       } catch (error) {
         console.log("책 카테고리를 가져오는 중 오류가 발생했습니다.");

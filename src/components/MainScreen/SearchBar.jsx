@@ -23,12 +23,9 @@ const SearchBar = ({ onSearch }) => {
     }
 
     try {
-      const response = await api.get(
-        `${process.env.REACT_APP_SERVER_PROXY}/books/search`,
-        {
-          params: { searchWord },
-        }
-      );
+      const response = await api.get(`/books/search`, {
+        params: { searchWord },
+      });
 
       if (response.status === 200) {
         onSearch(response.data, searchWord); // 검색 결과를 상위 컴포넌트에 전달

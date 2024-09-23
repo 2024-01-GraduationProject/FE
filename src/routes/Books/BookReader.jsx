@@ -34,9 +34,7 @@ const BookReader = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/user-data`
-        );
+        const userResponse = await api.get(`/user-data`);
         setUserId(userResponse.data.userId); // 사용자 ID 저장
       } catch (err) {
         alert("사용자 데이터를 가져오는 데 실패했습니다.");
@@ -50,17 +48,12 @@ const BookReader = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/books/${bookId}/content`,
-          {
-            responseType: "arraybuffer",
-            headers: { Accept: "application/epub+zip" },
-          }
-        );
+        const response = await api.get(`/books/${bookId}/content`, {
+          responseType: "arraybuffer",
+          headers: { Accept: "application/epub+zip" },
+        });
 
-        const bookDetailResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/books/${bookId}`
-        );
+        const bookDetailResponse = await api.get(`/books/${bookId}`);
         setBookTitle(bookDetailResponse.data.title);
         setBookAuthor(bookDetailResponse.data.author);
 
@@ -154,19 +147,13 @@ const BookReader = () => {
           const fetchLastReadPage = async () => {
             try {
               // 현재 읽고 있는 책의 데이터 가져오기
-              const readingResponse = await api.get(
-                `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/reading`,
-                {
-                  params: { userId },
-                }
-              );
+              const readingResponse = await api.get(`/bookshelf/reading`, {
+                params: { userId },
+              });
               // 독서 완료 중 lastReadPage가 100이 아닌 책 가져오기
-              const completedResponse = await api.get(
-                `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completed`,
-                {
-                  params: { userId },
-                }
-              );
+              const completedResponse = await api.get(`/bookshelf/completed`, {
+                params: { userId },
+              });
 
               if (
                 readingResponse.status === 200 &&
@@ -317,28 +304,24 @@ const BookReader = () => {
 
           const lastReadPage = progress;
 
-          const response = await api.put(
-            `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completeBook`,
-            null,
-            {
-              params: {
-                userId: userId,
-                bookId: bookId,
-                lastReadPage: lastReadPage, // 데이터 형식 조정
-                indices: indexes.map((index) => index.progress), // 인덱스 리스트
-              },
-              paramsSerializer: (params) => {
-                const queryString = new URLSearchParams();
-                queryString.append("userId", params.userId);
-                queryString.append("bookId", params.bookId);
-                queryString.append("lastReadPage", params.lastReadPage);
-                params.indices.forEach((index, i) => {
-                  queryString.append(`indices[${i}]`, index); // 여기서 인덱스를 인코딩
-                });
-                return queryString.toString();
-              },
-            }
-          );
+          const response = await api.put(`/bookshelf/completeBook`, null, {
+            params: {
+              userId: userId,
+              bookId: bookId,
+              lastReadPage: lastReadPage, // 데이터 형식 조정
+              indices: indexes.map((index) => index.progress), // 인덱스 리스트
+            },
+            paramsSerializer: (params) => {
+              const queryString = new URLSearchParams();
+              queryString.append("userId", params.userId);
+              queryString.append("bookId", params.bookId);
+              queryString.append("lastReadPage", params.lastReadPage);
+              params.indices.forEach((index, i) => {
+                queryString.append(`indices[${i}]`, index); // 여기서 인덱스를 인코딩
+              });
+              return queryString.toString();
+            },
+          });
         } catch (error) {
           console.error(
             "Error saving progress:",
@@ -358,10 +341,7 @@ const BookReader = () => {
       if (progress > 0 && isAuthenticated && userId) {
         const lastReadPage = (progress / 100) * 100;
 
-        const url = new URL(
-          `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completeBook`,
-          window.location.origin
-        );
+        const url = new URL(`/bookshelf/completeBook`, window.location.origin);
         url.searchParams.append("userId", userId);
         url.searchParams.append("bookId", bookId);
         url.searchParams.append("lastReadPage", lastReadPage); // float 형식으로 저장
@@ -384,36 +364,32 @@ const BookReader = () => {
       if (progress > 0 && isAuthenticated && userId) {
         const lastReadPage = (progress / 100) * 100;
         try {
-          await api.put(
-            `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completeBook`,
-            null,
-            {
-              params: {
-                userId: userId,
-                bookId: bookId,
-                lastReadPage: lastReadPage, // float 형식으로 저장
-                indices: indexes.map((index) =>
-                  parseFloat(index.progress).toFixed(1)
-                ),
-              },
+          await api.put(`/bookshelf/completeBook`, null, {
+            params: {
+              userId: userId,
+              bookId: bookId,
+              lastReadPage: lastReadPage, // float 형식으로 저장
+              indices: indexes.map((index) =>
+                parseFloat(index.progress).toFixed(1)
+              ),
+            },
 
-              paramsSerializer: (params) => {
-                const queryString = new URLSearchParams();
-                queryString.append("userId", params.userId);
-                queryString.append("bookId", params.bookId);
-                queryString.append("lastReadPage", params.lastReadPage);
-                params.indices.forEach((index, i) => {
-                  const formattedIndex = parseFloat(index).toFixed(1); // 소수점 첫째자리로 변환
-                  queryString.append(
-                    `indices[${i}]`,
-                    encodeURIComponent(formattedIndex)
-                  ); // 인코딩
-                });
+            paramsSerializer: (params) => {
+              const queryString = new URLSearchParams();
+              queryString.append("userId", params.userId);
+              queryString.append("bookId", params.bookId);
+              queryString.append("lastReadPage", params.lastReadPage);
+              params.indices.forEach((index, i) => {
+                const formattedIndex = parseFloat(index).toFixed(1); // 소수점 첫째자리로 변환
+                queryString.append(
+                  `indices[${i}]`,
+                  encodeURIComponent(formattedIndex)
+                ); // 인코딩
+              });
 
-                return queryString.toString();
-              },
-            }
-          );
+              return queryString.toString();
+            },
+          });
           console.log("Progress saved before logout.");
         } catch (error) {
           console.error("Error saving progress before logout:", error);
@@ -510,7 +486,7 @@ const BookReader = () => {
               onClick={toggleIndex}
               disabled={!isAuthenticated} // 인증되지 않은 경우 버튼 비활성화
             >
-              {/*{isIndex ? <FaBookmark /> : <FaRegBookmark />}*/}
+              {isIndex ? <FaBookmark /> : <FaRegBookmark />}
             </button>
           </div>
           <button className="nav-button right" onClick={handleNextPage}>
@@ -523,7 +499,7 @@ const BookReader = () => {
           >
             {showIndexes ? <FaRegBookmark /> : <FaBookmark />}
           </button>
-          {/*{showIndexes && (
+          {showIndexes && (
             <div className="indexes-list">
               <span className="bookmark-title"> 책갈피 </span>
               <ul>
@@ -538,7 +514,7 @@ const BookReader = () => {
                 ))}
               </ul>
             </div>
-          )}*/}
+          )}
           <div className="progress-bar-container">
             <div
               className="progress-bar"

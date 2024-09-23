@@ -20,9 +20,7 @@ const BestBook = () => {
     const fetchBestBooks = async () => {
       try {
         // 추천 도서 가져오기
-        const booksResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/books/best`
-        );
+        const booksResponse = await api.get(`/books/best`);
         const bestBooks = booksResponse.data;
         setBestBooks(bestBooks);
       } catch (err) {

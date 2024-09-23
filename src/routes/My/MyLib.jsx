@@ -33,9 +33,7 @@ const MyLib = () => {
 
       try {
         // 닉네임 및 사용자 ID 가져오기
-        const userDataResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/user-data`
-        );
+        const userDataResponse = await api.get(`/user-data`);
         const { userId, nickname } = userDataResponse.data;
         setNickname(nickname);
         setUserId(userId);
@@ -54,16 +52,13 @@ const MyLib = () => {
         if (activeTab === "책장") {
           if (subTab === "독서 중") {
             // 독서 중인 책 가져오기
-            const readingResponse = await api.get(
-              `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/reading`,
-              {
-                params: { userId },
-              }
-            );
+            const readingResponse = await api.get(`/bookshelf/reading`, {
+              params: { userId },
+            });
             const readingBooksWithDetails = await Promise.all(
               readingResponse.data.map(async (userBook) => {
                 const bookDetailsResponse = await api.get(
-                  `${process.env.REACT_APP_SERVER_PROXY}/books/${userBook.bookId}`
+                  `/books/${userBook.bookId}`
                 );
                 const bookDetails = bookDetailsResponse.data;
 
@@ -80,18 +75,15 @@ const MyLib = () => {
             );
 
             // 독서 완료 책 중 lastReadPage가 100이 아닌 책 가져오기
-            const completedResponse = await api.get(
-              `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completed`,
-              {
-                params: { userId },
-              }
-            );
+            const completedResponse = await api.get(`/bookshelf/completed`, {
+              params: { userId },
+            });
             const incompleteCompletedBooks = await Promise.all(
               completedResponse.data
                 .filter((userBook) => userBook.lastReadPage < 100)
                 .map(async (userBook) => {
                   const bookDetailsResponse = await api.get(
-                    `${process.env.REACT_APP_SERVER_PROXY}/books/${userBook.bookId}`
+                    `/books/${userBook.bookId}`
                   );
                   const bookDetails = bookDetailsResponse.data;
 
@@ -116,16 +108,13 @@ const MyLib = () => {
             setReadingBooks(combinedBooks);
           } else if (subTab === "독서 완료") {
             // 독서 완료 탭일 경우 독서 완료 책 목록 가져오기
-            const completedResponse = await api.get(
-              `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/completed`,
-              {
-                params: { userId },
-              }
-            );
+            const completedResponse = await api.get(`/bookshelf/completed`, {
+              params: { userId },
+            });
             const completedBooksWithDetails = await Promise.all(
               completedResponse.data.map(async (userBook) => {
                 const bookDetailsResponse = await api.get(
-                  `${process.env.REACT_APP_SERVER_PROXY}/books/${userBook.bookId}`
+                  `/books/${userBook.bookId}`
                 );
                 const bookDetails = bookDetailsResponse.data;
 
@@ -144,15 +133,13 @@ const MyLib = () => {
           }
         } else if (activeTab === "My Favorite") {
           const favoritesResponse = await api.get(
-            `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/list?userId=${userId}`
+            `/bookmarks/list?userId=${userId}`
           );
           const favoriteBookIds = favoritesResponse.data.map(
             (favorite) => favorite.bookId
           );
 
-          const booksResponse = await api.get(
-            `${process.env.REACT_APP_SERVER_PROXY}/books`
-          );
+          const booksResponse = await api.get(`/books`);
           const allBooks = booksResponse.data;
 
           const favoriteBooks = allBooks.filter((book) =>
@@ -228,7 +215,7 @@ const MyLib = () => {
         selectedBooks.map(async (bookId) => {
           // 즐겨찾기에서 삭제
           await api.delete(
-            `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/remove?userId=${userId}&bookId=${bookId}`
+            `/bookmarks/remove?userId=${userId}&bookId=${bookId}`
           );
         })
       );

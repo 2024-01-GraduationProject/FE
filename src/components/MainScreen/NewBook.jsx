@@ -12,9 +12,7 @@ const NewBook = () => {
     // 컴포넌트가 마운트될 때 책 목록을 가져옴
     const fetchBooks = async () => {
       try {
-        const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/books`
-        );
+        const response = await api.get(`/books`);
         // 책 목록을 출판일 기준으로 내림차순 정렬
         const sortedBooks = response.data
           .sort(

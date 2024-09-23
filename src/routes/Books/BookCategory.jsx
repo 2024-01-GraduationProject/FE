@@ -15,9 +15,7 @@ const BookCategory = () => {
     const fetchBooksByCategory = async () => {
       try {
         // 해당 카테고리의 책 목록을 가져오기
-        const booksResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/books/category/${categoryName}`
-        );
+        const booksResponse = await api.get(`/books/category/${categoryName}`);
         if (booksResponse.status !== 200) {
           throw new Error(
             `Network response was not ok. Status: ${booksResponse.status}`

@@ -67,10 +67,7 @@ const Intro = () => {
       setIsEmailAvailable(false);
     } else {
       try {
-        const response = await api.post(
-          `${process.env.REACT_APP_SERVER_PROXY}/validate-email`,
-          { email }
-        );
+        const response = await api.post(`/validate-email`, { email });
 
         if (response.data.isDuplicate) {
           setEmailError("이미 사용 중인 이메일입니다.");

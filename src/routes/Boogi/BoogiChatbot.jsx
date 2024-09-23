@@ -28,9 +28,7 @@ const BoogiChatbot = () => {
       const encodedBookTitle = encodeURIComponent(bookTitle);
       // 책 완독 축하 메시지와 첫 질문을 가져옴
       api
-        .get(
-          `${process.env.REACT_APP_SERVER_PROXY}/boogi/ask-question/${userId}/${encodedBookTitle}`
-        )
+        .get(`/boogi/ask-question/${userId}/${encodedBookTitle}`)
         .then((response) => {
           // 응답이 문자열인지 배열인지 확인
           if (Array.isArray(response.data)) {
@@ -74,7 +72,7 @@ const BoogiChatbot = () => {
     // 답변 전송 후 챗봇 응답
     setTimeout(() => {
       api
-        .post(`${process.env.REACT_APP_SERVER_PROXY}/boogi/answer`, userInput, {
+        .post(`/boogi/answer`, userInput, {
           params: {
             userId,
             question: messages[messages.length - 1].text,
@@ -122,7 +120,7 @@ const BoogiChatbot = () => {
         .finally(() => {
           // 사용자 답변을 DB에 저장
           api
-            .post(`${process.env.REACT_APP_SERVER_PROXY}/boogi/save-answer`, {
+            .post(`/boogi/save-answer`, {
               userId,
               bookId,
               answer: userInput,
@@ -154,17 +152,13 @@ const BoogiChatbot = () => {
 
     setTimeout(() => {
       api
-        .post(
-          `${process.env.REACT_APP_SERVER_PROXY}/boogi/next-question`,
-          null,
-          {
-            params: {
-              userId,
-              response,
-              bookTitle,
-            },
-          }
-        )
+        .post(`/boogi/next-question`, null, {
+          params: {
+            userId,
+            response,
+            bookTitle,
+          },
+        })
         .then((res) => {
           // 응답을 문자열로 받아와 직접 메시지로 사용
           const message = res.data;

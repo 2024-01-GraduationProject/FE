@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+const URL = `${PROXY}`;
+
 const api = axios.create({
-  baseURL: "http://43.201.64.218:8080/", // 포트 번호 8080으로 설정
+  baseURL: URL, // 포트 번호 8080으로 설정
   withCredentials: true, // 세션 쿠키를 전송
 });
 

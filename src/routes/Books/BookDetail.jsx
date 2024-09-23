@@ -20,7 +20,7 @@ const BookDetail = () => {
     const fetchUserData = async () => {
       try {
         const userResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/user-data`
+          `${process.env.REACT_APP_SERVER_URL}/user-data`
         );
         setUserId(userResponse.data.userId); // 사용자 ID 저장
       } catch (err) {
@@ -40,9 +40,7 @@ const BookDetail = () => {
     const fetchBookAndUserbookId = async () => {
       try {
         // 책 정보를 가져오기
-        const bookResponse = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/books/${bookId}`
-        );
+        const bookResponse = await api.get(`/books/${bookId}`);
         setBook(bookResponse.data);
 
         // 즐겨찾기 상태 확인
@@ -65,12 +63,9 @@ const BookDetail = () => {
   const checkFavoriteStatus = async () => {
     try {
       // 새로운 북마크 목록 조회 엔드포인트
-      const bookmarkResponse = await api.get(
-        `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/list`,
-        {
-          params: { userId },
-        }
-      );
+      const bookmarkResponse = await api.get(`/bookmarks/list`, {
+        params: { userId },
+      });
       const bookmarks = bookmarkResponse.data;
 
       // 현재 book_id와 일치하는 책을 찾고, favorite 상태 확인
@@ -86,12 +81,9 @@ const BookDetail = () => {
   // 다운로드 상태 확인 함수 추가
   const checkDownloadStatus = async () => {
     try {
-      const readingResponse = await api.get(
-        `${process.env.REACT_APP_SERVER_PROXY}/bookshelf/reading`,
-        {
-          params: { userId },
-        }
-      );
+      const readingResponse = await api.get(`/bookshelf/reading`, {
+        params: { userId },
+      });
       const readingBooks = readingResponse.data;
 
       // 현재 책이 "READING" 상태인지 확인
@@ -110,7 +102,6 @@ const BookDetail = () => {
     try {
       const currentDate = new Date().toISOString().split("T")[0]; // 현재 날짜를 가져옴 (yyyy-mm-dd)
       const requestData = {
-        //userbookId: `${userId}-${bookId}`, // userId와 book_id를 결합하여 userbookId 생성
         userId: parseInt(userId),
         bookId: parseInt(bookId),
         startDate: currentDate,
@@ -118,9 +109,7 @@ const BookDetail = () => {
 
       // 다운로드 누르면 '독서 중'에 저장
       // URL에 쿼리 파라미터로 userId, bookId, startDate를 포함
-      const url = `${
-        process.env.REACT_APP_SERVER_PROXY
-      }/bookshelf/add-to-reading?userId=${encodeURIComponent(
+      const url = `/bookshelf/add-to-reading?userId=${encodeURIComponent(
         userId
       )}&bookId=${encodeURIComponent(bookId)}&startDate=${encodeURIComponent(
         currentDate
@@ -150,13 +139,9 @@ const BookDetail = () => {
     }
 
     try {
-      await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/addBook`,
-        null,
-        {
-          params: { userId, bookId: bookId },
-        }
-      );
+      await api.post(`/bookmarks/addBook`, null, {
+        params: { userId, bookId: bookId },
+      });
       setIsFavorite(true);
     } catch (error) {
       setError("즐겨찾기 추가에 실패했습니다.");
@@ -170,12 +155,9 @@ const BookDetail = () => {
     }
 
     try {
-      await api.delete(
-        `${process.env.REACT_APP_SERVER_PROXY}/bookmarks/remove`,
-        {
-          params: { userId, bookId: bookId },
-        }
-      );
+      await api.delete(`/bookmarks/remove`, {
+        params: { userId, bookId: bookId },
+      });
       setIsFavorite(false);
     } catch (error) {
       setError("즐겨찾기 제거에 실패했습니다.");

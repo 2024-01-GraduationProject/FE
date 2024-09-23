@@ -31,9 +31,7 @@ const Taste = () => {
     // 연령 데이터 가져오기
     const fetchAges = async () => {
       try {
-        const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/ages`
-        );
+        const response = await api.get(`/ages`);
         setAgeOptions(response.data);
       } catch (error) {
         console.log("연령 데이터를 가져오는 중 오류가 발생했습니다.");
@@ -43,9 +41,7 @@ const Taste = () => {
     // 성별 데이터 가져오기
     const fetchGenders = async () => {
       try {
-        const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/genders`
-        );
+        const response = await api.get(`/genders`);
         setGenderOptions(response.data);
       } catch (error) {
         console.log("성별 데이터를 가져오는 중 오류가 발생했습니다.");
@@ -55,9 +51,7 @@ const Taste = () => {
     // 취향 데이터 가져오기
     const fetchBookCategory = async () => {
       try {
-        const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/categories`
-        );
+        const response = await api.get(`/categories`);
         console.log("bookCategory options:", response.data);
         setBookCategoryOptions(response.data);
       } catch (error) {
@@ -104,15 +98,12 @@ const Taste = () => {
     if (!isButtonEnabled) return; // 버튼이 비활성화일 때는 실행하지 않음
 
     try {
-      const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/save-taste`,
-        {
-          email,
-          age: selectedAge,
-          gender: selectedGender,
-          bookTaste: selectedBookTastes,
-        }
-      );
+      const response = await api.post(`/save-taste`, {
+        email,
+        age: selectedAge,
+        gender: selectedGender,
+        bookTaste: selectedBookTastes,
+      });
       if (response.status === 200) {
         navigate("/tastenext", { state: { email, password } });
       } else {

@@ -34,10 +34,10 @@ const EditMyPage = () => {
       try {
         const [userData, agesData, gendersData, categoriesData] =
           await Promise.all([
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/user-data`),
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/ages`),
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/genders`),
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/categories`),
+            api.get(`/user-data`),
+            api.get(`/ages`),
+            api.get(`/genders`),
+            api.get(`/categories`),
           ]);
 
         setUser({
@@ -110,18 +110,15 @@ const EditMyPage = () => {
 
     try {
       // 사용자 데이터 업데이트 요청
-      const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/update-userData`,
-        {
-          newNickname: user.newNickname,
-          newEmail: user.newEmail,
-          newAge: user.newAge,
-          newGender: user.newGender,
-          newBookTaste: user.newBookTaste,
-          newPassword,
-          agreements: user.agreements,
-        }
-      );
+      const response = await api.post(`/update-userData`, {
+        newNickname: user.newNickname,
+        newEmail: user.newEmail,
+        newAge: user.newAge,
+        newGender: user.newGender,
+        newBookTaste: user.newBookTaste,
+        newPassword,
+        agreements: user.agreements,
+      });
 
       alert("저장이 완료되었습니다.");
       navigate("/mypage");
@@ -151,12 +148,9 @@ const EditMyPage = () => {
     }
 
     try {
-      const checkPasswordResponse = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/check-password`,
-        {
-          currentPassword,
-        }
-      );
+      const checkPasswordResponse = await api.post(`/check-password`, {
+        currentPassword,
+      });
       if (checkPasswordResponse.data) {
         setPasswordError("");
         setIsPasswordVerified(true);
@@ -185,12 +179,9 @@ const EditMyPage = () => {
     }
 
     try {
-      const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/validate-nickname`,
-        {
-          nickname: user.newNickname,
-        }
-      );
+      const response = await api.post(`/validate-nickname`, {
+        nickname: user.newNickname,
+      });
 
       if (response.data.isDuplicate) {
         setNicknameError("이미 사용 중인 닉네임입니다.");
