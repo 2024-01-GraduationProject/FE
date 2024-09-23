@@ -34,10 +34,10 @@ const EditMyPage = () => {
       try {
         const [userData, agesData, gendersData, categoriesData] =
           await Promise.all([
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/user-data`),
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/ages`),
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/genders`),
-            api.get(`${process.env.REACT_APP_SERVER_PROXY}/categories`),
+            api.get(`${process.env.REACT_APP_SERVER_URL}/user-data`),
+            api.get(`${process.env.REACT_APP_SERVER_URL}/ages`),
+            api.get(`${process.env.REACT_APP_SERVER_URL}/genders`),
+            api.get(`${process.env.REACT_APP_SERVER_URL}/categories`),
           ]);
 
         setUser({
@@ -111,7 +111,7 @@ const EditMyPage = () => {
     try {
       // 사용자 데이터 업데이트 요청
       const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/update-userData`,
+        `${process.env.REACT_APP_SERVER_URL}/update-userData`,
         {
           newNickname: user.newNickname,
           newEmail: user.newEmail,
@@ -152,7 +152,7 @@ const EditMyPage = () => {
 
     try {
       const checkPasswordResponse = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/check-password`,
+        `${process.env.REACT_APP_SERVER_URL}/check-password`,
         {
           currentPassword,
         }
@@ -186,7 +186,7 @@ const EditMyPage = () => {
 
     try {
       const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/validate-nickname`,
+        `${process.env.REACT_APP_SERVER_URL}/validate-nickname`,
         {
           nickname: user.newNickname,
         }

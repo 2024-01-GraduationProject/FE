@@ -32,7 +32,7 @@ const Taste = () => {
     const fetchAges = async () => {
       try {
         const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/ages`
+          `${process.env.REACT_APP_SERVER_URL}/ages`
         );
         setAgeOptions(response.data);
       } catch (error) {
@@ -44,7 +44,7 @@ const Taste = () => {
     const fetchGenders = async () => {
       try {
         const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/genders`
+          `${process.env.REACT_APP_SERVER_URL}/genders`
         );
         setGenderOptions(response.data);
       } catch (error) {
@@ -56,7 +56,7 @@ const Taste = () => {
     const fetchBookCategory = async () => {
       try {
         const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/categories`
+          `${process.env.REACT_APP_SERVER_URL}/categories`
         );
         console.log("bookCategory options:", response.data);
         setBookCategoryOptions(response.data);
@@ -105,7 +105,7 @@ const Taste = () => {
 
     try {
       const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/save-taste`,
+        `${process.env.REACT_APP_SERVER_URL}/save-taste`,
         {
           email,
           age: selectedAge,

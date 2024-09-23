@@ -28,7 +28,7 @@ const Login = () => {
 
     try {
       const response = await api.post(
-        `${process.env.REACT_APP_SERVER_PROXY}/login`,
+        `${process.env.REACT_APP_SERVER_URL}/login`,
         {
           email: email,
           password: password,

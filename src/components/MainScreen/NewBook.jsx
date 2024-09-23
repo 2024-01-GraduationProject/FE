@@ -13,7 +13,7 @@ const NewBook = () => {
     const fetchBooks = async () => {
       try {
         const response = await api.get(
-          `${process.env.REACT_APP_SERVER_PROXY}/books`
+          `${process.env.REACT_APP_SERVER_URL}/books`
         );
         // 책 목록을 출판일 기준으로 내림차순 정렬
         const sortedBooks = response.data

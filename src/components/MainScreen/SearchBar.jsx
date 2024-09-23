@@ -24,7 +24,7 @@ const SearchBar = ({ onSearch }) => {
 
     try {
       const response = await api.get(
-        `${process.env.REACT_APP_SERVER_PROXY}/books/search`,
+        `${process.env.REACT_APP_SERVER_URL}/books/search`,
         {
           params: { searchWord },
         }

@@ -68,7 +68,7 @@ const Intro = () => {
     } else {
       try {
         const response = await api.post(
-          `${process.env.REACT_APP_SERVER_PROXY}/validate-email`,
+          `${process.env.REACT_APP_SERVER_URL}/validate-email`,
           { email }
         );
 
