@@ -48,10 +48,12 @@ const BookReader = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
+        const token = localStorage.getItem("authToken"); // 저장된 토큰 확인
         const response = await api.get(`/books/${bookId}/content`, {
           responseType: "arraybuffer",
           headers: {
             Accept: "application/epub+zip",
+            Authorization: `Bearer ${token}`, // Bearer 토큰 추가
           },
         });
 
