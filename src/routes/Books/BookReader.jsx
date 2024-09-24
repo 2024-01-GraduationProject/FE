@@ -461,9 +461,7 @@ const BookReader = () => {
 
   const handleIndexClick = async (indexProgress) => {
     if (bookInstance && rendition) {
-      const cfi = bookInstance.locations.cfiFromPercentage(
-        (indexProgress / 100).toFixed(1)
-      );
+      const cfi = bookInstance.locations.cfiFromPercentage(indexProgress / 100);
       await rendition.display(cfi);
       setProgress(indexProgress);
       console.log(
