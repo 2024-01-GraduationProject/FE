@@ -50,7 +50,10 @@ const BookReader = () => {
       try {
         const response = await api.get(`/books/${bookId}/content`, {
           responseType: "arraybuffer",
-          headers: { Accept: "application/epub+zip" },
+          headers: {
+            Accept: "application/epub+zip",
+            Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 포함
+          },
         });
 
         const bookDetailResponse = await api.get(`/books/${bookId}`);
