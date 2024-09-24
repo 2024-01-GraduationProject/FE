@@ -52,7 +52,6 @@ const BookReader = () => {
           responseType: "arraybuffer",
           headers: {
             Accept: "application/epub+zip",
-            Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 포함
           },
         });
 
