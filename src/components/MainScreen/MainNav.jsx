@@ -5,7 +5,6 @@ import api from "../../api"; // Axios 인스턴스 import
 const MainNav = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  // 새로 추가
   const [nickname, setNickname] = useState("");
   const [monthlyReading, setMonthlyReading] = useState({
     month: 0,
@@ -79,8 +78,8 @@ const MainNav = () => {
         {/* 이 달의 독서량 표시 */}
         <div className="monthly_reading">
           <div>
-            <span className="nickname">{nickname}</span> 님의{" "}
-            <span className="month">{monthlyReading.month}</span>월의 독서량
+            <span className="nickname">{nickname}</span> 님의 <br />
+            <span className="month">{monthlyReading.month}</span>월 독서량
           </div>
           <div className="reading_count">{monthlyReading.readingCount}권</div>
         </div>
