@@ -11,17 +11,6 @@ const SearchList = () => {
   const [searchWord, setSearchWord] = useState(""); // 검색어 상태
 
   useEffect(() => {
-    // 로컬 스토리지에서 로그인 상태 확인
-    const token = localStorage.getItem("authToken");
-
-    if (token) {
-      setIsAuthenticated(true); // 로그인 상태 유지
-    } else {
-      navigate("/login"); // 로그인 상태가 아니라면 로그인 페이지로 이동
-    }
-  }, [navigate]);
-
-  useEffect(() => {
     // 검색 결과가 state로 전달된 경우에 처리
     if (location.state && location.state.searchResults) {
       setSearchResults(location.state.searchResults);

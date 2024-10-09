@@ -35,11 +35,6 @@ const MyLib = () => {
       } catch (error) {
         alert("사용자 데이터를 가져오는 중 오류가 발생했습니다.");
       }
-
-      if (!userId) {
-        navigate("/login"); // 로그인 페이지로 리다이렉트
-        return;
-      }
     };
     fetchUserData();
   }, [isAuthenticated, navigate]);

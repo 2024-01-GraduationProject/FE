@@ -12,11 +12,6 @@ const RecommendBook = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 인증 상태가 false이면 로그인 페이지로 리디렉션
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-
     // 사용자 데이터 가져오기
     const fetchUserData = async () => {
       try {
@@ -43,7 +38,7 @@ const RecommendBook = () => {
 
     fetchUserData();
     fetchRecommendedBooks();
-  }, [isAuthenticated, navigate]);
+  }, [navigate]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

@@ -22,15 +22,10 @@ const MyPage = () => {
       } catch (error) {
         console.error("데이터 불러오기 실패: ", error);
       }
-
-      if (!user) {
-        navigate("/login"); // Redirect to login if not authenticated
-        return;
-      }
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, [isAuthenticated, navigate]);
 
   if (!user) return <p>Loading...</p>;
 

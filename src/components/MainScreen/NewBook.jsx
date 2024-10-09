@@ -4,8 +4,6 @@ import api from "../../api";
 
 const NewBook = () => {
   const [books, setBooks] = useState([]); // 신간 8권 저장하는 상태
-  // const [currentPage, setCurrentPage] = useState(0); // 현재 페이지를 저장하는 상태
-  // const booksPerPage = 4; // 한 번에 보여줄 책의 수
   const navigate = useNavigate();
 
   useEffect(() => {
