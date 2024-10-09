@@ -34,7 +34,7 @@ const MainNav = () => {
       try {
         // 닉네임 가져오기
         const nicknameResponse = await api.get(`/user-nickname`);
-        setNickname(nicknameResponse.data.nickname);
+        setNickname(nicknameResponse.data);
 
         // 이 달의 독서량 가져오기
         const readingResponse = await api.get(`/monthlyReading`);
