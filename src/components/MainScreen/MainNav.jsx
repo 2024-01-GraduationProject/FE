@@ -78,8 +78,11 @@ const MainNav = () => {
 
         {/* 이 달의 독서량 표시 */}
         <div className="monthly_reading">
-          <div>{`${nickname} 님의 ${monthlyReading.month}월의 독서량`}</div>
-          <div className="reading_count">{`${monthlyReading.readingCount}권`}</div>
+          <div>
+            <span className="nickname">{nickname}</span> 님의{" "}
+            <span className="month">{monthlyReading.month}</span>월의 독서량
+          </div>
+          <div className="reading_count">{monthlyReading.readingCount}권</div>
         </div>
 
         {/* 도서 카테고리 */}

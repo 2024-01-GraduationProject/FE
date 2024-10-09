@@ -17,6 +17,7 @@
 
 .mylib {
   width: 100%;
+  max-width: 200px;
   height: 50px;
   font-size: 1.5vw;
   font-weight: bold;
@@ -41,24 +42,32 @@
 /* 이 달의 독서량 섹션 */
 .monthly_reading {
   width: 100%;
-  padding: 1em;
-  background-color: rgba(234, 254, 211, 0.6);
-  border: 2px solid #388e3c;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid rgba(234, 254, 211, 0.6);
   border-radius: 10px;
   text-align: center;
   font-size: 1vw;
   font-weight: bold;
   color: #056748;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 0.5em;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
   div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    font-size: 1.1rem;
+    margin: 5px 0;
+  }
+  .nickname {
+    color: #00b894;
+    font-weight: bold;
+  }
+  .month {
+    color: #00b894;
+    font-weight: bold;
   }
 
   .reading_count {
@@ -68,11 +77,11 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: rgba(148, 211, 128, 0.6);
+    background-color: white;
     font-size: 1.2vw;
     font-weight: bold;
-    color: #056748;
-    border: 2px solid #388e3c;
+    color: #00b894;
+    border: 2px solid rgba(234, 254, 211, 0.6);
   }
 }
 
@@ -89,6 +98,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
+  max-width: 200px;
   height: 50px;
 }
 
@@ -96,6 +106,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 200px;
   background-color: rgba(234, 254, 211, 0.6);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
