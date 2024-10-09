@@ -5,7 +5,8 @@ import api from "../../api"; // Axios 인스턴스 import
 const MainNav = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  onst[(nickname, setNickname)] = useState("");
+  // 새로 추가
+  const [nickname, setNickname] = useState("");
   const [monthlyReading, setMonthlyReading] = useState({
     month: 0,
     readingCount: 0,
