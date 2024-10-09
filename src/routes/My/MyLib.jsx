@@ -26,11 +26,6 @@ const MyLib = () => {
   useEffect(() => {
     // 사용자 데이터 가져오기
     const fetchUserData = async () => {
-      if (!isAuthenticated) {
-        navigate("/login"); // 로그인 페이지로 리다이렉트
-        return;
-      }
-
       try {
         // 닉네임 및 사용자 ID 가져오기
         const userDataResponse = await api.get(`/user-data`);
@@ -39,6 +34,11 @@ const MyLib = () => {
         setUserId(userId);
       } catch (error) {
         alert("사용자 데이터를 가져오는 중 오류가 발생했습니다.");
+      }
+
+      if (!userId) {
+        navigate("/login"); // 로그인 페이지로 리다이렉트
+        return;
       }
     };
     fetchUserData();

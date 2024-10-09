@@ -22,12 +22,14 @@ const EditMyPage = () => {
   const [initialData, setInitialData] = useState({});
   const { isAuthenticated } = useAuth(); // 로그인 여부
 
-  useEffect(() => {
+  {
+    /*useEffect(() => {
     if (!isAuthenticated) {
       // 인증되지 않은 경우 로그인 페이지로 리다이렉트
       navigate("/login");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate]); */
+  }
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -69,6 +71,11 @@ const EditMyPage = () => {
     };
 
     fetchInitialData();
+
+    if (!userData) {
+      navigate("/login"); // 로그인 페이지로 리다이렉트
+      return;
+    }
   }, []);
 
   useEffect(() => {

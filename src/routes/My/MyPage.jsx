@@ -15,11 +15,6 @@ const MyPage = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login"); // Redirect to login if not authenticated
-      return;
-    }
-
     const fetchUserData = async () => {
       try {
         const response = await api.get(`/user-data`);
@@ -27,10 +22,15 @@ const MyPage = () => {
       } catch (error) {
         console.error("데이터 불러오기 실패: ", error);
       }
+
+      if (!user) {
+        navigate("/login"); // Redirect to login if not authenticated
+        return;
+      }
     };
 
     fetchUserData();
-  }, [isAuthenticated, navigate]);
+  }, [navigate]);
 
   if (!user) return <p>Loading...</p>;
 
