@@ -5,6 +5,11 @@ import api from "../../api"; // Axios 인스턴스 import
 const MainNav = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  onst[(nickname, setNickname)] = useState("");
+  const [monthlyReading, setMonthlyReading] = useState({
+    month: 0,
+    readingCount: 0,
+  });
   const navigate = useNavigate();
   const location = useLocation(); // 현재 경로 감지
 
@@ -20,6 +25,25 @@ const MainNav = () => {
     };
 
     fetchCategories();
+  }, []);
+
+  // 사용자 닉네임과 월별 독서량 가져오기
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // 닉네임 가져오기
+        const nicknameResponse = await api.get(`/user-nickname`);
+        setNickname(nicknameResponse.data.nickname);
+
+        // 이 달의 독서량 가져오기
+        const readingResponse = await api.get(`/monthlyReading`);
+        setMonthlyReading(readingResponse.data);
+      } catch (error) {
+        console.log("사용자 정보를 가져오는 중 오류가 발생했습니다.");
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   useEffect(() => {
@@ -46,10 +70,18 @@ const MainNav = () => {
   return (
     <>
       <div className="main_nav">
+        {/* 내 서재 버튼 */}
         <button className="mylib" onClick={() => navigate("/mylib")}>
           내 서재 📖
         </button>
 
+        {/* 이 달의 독서량 표시 */}
+        <div className="monthly_reading">
+          <div>{`${nickname} 님의 ${monthlyReading.month}월의 독서량`}</div>
+          <div className="reading_count">{`${monthlyReading.readingCount}권`}</div>
+        </div>
+
+        {/* 도서 카테고리 */}
         <div className="category_title">도서 카테고리</div>
         <div className="category_buttons">
           {categoryOptions.map((categoryData) => (

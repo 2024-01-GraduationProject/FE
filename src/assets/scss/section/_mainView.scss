@@ -1,3 +1,5 @@
+/* MainNav.jsx */
+
 .main_nav {
   display: flex;
   flex-direction: column; /* 수직 정렬 */
@@ -34,6 +36,33 @@
 
   &:hover {
     transform: scale(1.1); /* hover 시 확대 효과 */
+  }
+}
+
+/* 이 달의 독서량 섹션 */
+.monthly_reading {
+  width: 100%;
+  height: auto;
+  background-color: rgba(234, 254, 211, 0.6);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  margin-bottom: 1em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  div {
+    font-size: 1.2vw;
+    color: #056748;
+    font-weight: bold;
+  }
+
+  .reading_count {
+    font-size: 1.5vw;
+    color: #056748;
+    margin-top: 0.3em;
   }
 }
 
