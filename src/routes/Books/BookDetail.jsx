@@ -215,6 +215,9 @@ const BookDetail = () => {
           </div>
           <div className="info-item publisher">
             <p>
+              {book.publisher} | {book.publicationDate}
+            </p>
+            <p>
               {bookCategories
                 .map((category, index) => (
                   <span
@@ -226,7 +229,6 @@ const BookDetail = () => {
                   </span>
                 ))
                 .reduce((prev, curr) => [prev, " , ", curr])}{" "}
-              | {book.publisher} | {book.publicationDate}
             </p>
           </div>
         </div>
