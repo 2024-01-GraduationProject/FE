@@ -10,6 +10,7 @@ const BookDetail = () => {
   const { isAuthenticated } = useAuth(); // 로그인 상태 가져오기
 
   const [book, setBook] = useState(null);
+  const [bookCategories, setBookCategories] = useState([]); // 카테고리 배열 추가
   const [isDownloaded, setIsDownloaded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [error, setError] = useState(null); // 에러 상태 추가
@@ -39,7 +40,8 @@ const BookDetail = () => {
       try {
         // 책 정보를 가져오기
         const bookResponse = await api.get(`/books/${bookId}`);
-        setBook(bookResponse.data);
+        setBook(bookResponse.data.book);
+        setBookCategories(bookResponse.data.bookCategory);
 
         // 즐겨찾기 상태 확인
         const isFav = await checkFavoriteStatus(`${userId}-${bookId}`);
@@ -213,12 +215,17 @@ const BookDetail = () => {
           </div>
           <div className="info-item publisher">
             <p>
-              <span
-                className="category-link"
-                onClick={() => navigate(`/books/category/${book.category}`)}
-              >
-                {book.category}
-              </span>{" "}
+              {bookCategories
+                .map((category, index) => (
+                  <span
+                    key={index}
+                    className="category-link"
+                    onClick={() => navigate(`/books/category/${category}`)}
+                  >
+                    {category}
+                  </span>
+                ))
+                .reduce((prev, curr) => [prev, " , ", curr])}{" "}
               | {book.publisher} | {book.publicationDate}
             </p>
           </div>
