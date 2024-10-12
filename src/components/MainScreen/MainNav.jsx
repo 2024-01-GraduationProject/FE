@@ -7,7 +7,7 @@ const MainNav = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [nickname, setNickname] = useState("");
   const [monthlyReading, setMonthlyReading] = useState({
-    month: 0,
+    currentMonth: 0,
     readingCount: 0,
   });
   const navigate = useNavigate();
@@ -79,7 +79,8 @@ const MainNav = () => {
         <div className="monthly_reading">
           <div>
             <span className="nickname">{nickname}</span> 님의 <br />
-            <span className="month">{monthlyReading.month}</span>월 독서량
+            <span className="month">{monthlyReading.currentMonth}</span>월
+            독서량
           </div>
           <div className="reading_count">{monthlyReading.readingCount}권</div>
         </div>
