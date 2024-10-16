@@ -7,8 +7,8 @@
   align-items: flex-start; /* 왼쪽 정렬 */
   padding: 2em; /* 내부 패딩 추가 */
   width: 200px; /* 네비게이션 바의 고정 너비 */
-  height: 100vh; /* 전체 화면 높이 차지 */
-  margin-top: 6.5em;
+  height: 125vh; /* 전체 화면 높이 차지 */
+  margin-top: 6.6em;
   margin-left: 2.5em;
   background-color: transparent;
   top: 0; /* 상단에 붙이기 */
@@ -17,7 +17,7 @@
 
 .mylib {
   width: 100%;
-  height: 50px;
+  height: 5em;
   font-size: 1.5vw;
   font-weight: bold;
   text-align: center;
@@ -42,6 +42,7 @@
 .monthly_reading {
   width: 100%;
   max-width: 180px;
+  height: 10em;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -99,7 +100,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 50px;
+  height: 5em;
 }
 
 .category_buttons {
