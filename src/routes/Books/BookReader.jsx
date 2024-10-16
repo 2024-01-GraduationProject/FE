@@ -58,8 +58,8 @@ const BookReader = () => {
         });
 
         const bookDetailResponse = await api.get(`/books/${bookId}`);
-        setBookTitle(bookDetailResponse.data.title);
-        setBookAuthor(bookDetailResponse.data.author);
+        setBookTitle(bookDetailResponse.data.book.title);
+        setBookAuthor(bookDetailResponse.data.book.author);
 
         if (response.status === 200) {
           const arrayBuffer = response.data;

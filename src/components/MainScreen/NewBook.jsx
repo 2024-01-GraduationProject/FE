@@ -44,7 +44,7 @@ const NewBook = () => {
     <div className="booklist-wrapper">
       <div className="main-booklist-component">
         <strong className="highlightNew">New! </strong>{" "}
-        <span class="groupingText">새로 들어온 책</span>
+        <span className="groupingText">새로 들어온 책</span>
       </div>
 
       <div className="newbook-list-wrapper">

@@ -19,8 +19,6 @@ const MyLib = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(""); // 모달의 타입 (다시 읽으시겠습니까? / 추가 옵션)
   const [selectedCompletedBook, setSelectedCompletedBook] = useState(null);
-
-  const { isAuthenticated } = useAuth(); // 로그인 상태 가져오기
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +35,7 @@ const MyLib = () => {
       }
     };
     fetchUserData();
-  }, [isAuthenticated, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     if (!userId) return; // userId가 로드되지 않았으면 아무 작업도 하지 않음
@@ -55,7 +53,7 @@ const MyLib = () => {
                 const bookDetailsResponse = await api.get(
                   `/books/${userBook.bookId}`
                 );
-                const bookDetails = bookDetailsResponse.data;
+                const bookDetails = bookDetailsResponse.data.book;
 
                 const progressRate =
                   Math.round(userBook.lastReadPage * 10) / 10;
@@ -80,7 +78,7 @@ const MyLib = () => {
                   const bookDetailsResponse = await api.get(
                     `/books/${userBook.bookId}`
                   );
-                  const bookDetails = bookDetailsResponse.data;
+                  const bookDetails = bookDetailsResponse.data.book;
 
                   return {
                     ...userBook,
@@ -111,7 +109,7 @@ const MyLib = () => {
                 const bookDetailsResponse = await api.get(
                   `/books/${userBook.bookId}`
                 );
-                const bookDetails = bookDetailsResponse.data;
+                const bookDetails = bookDetailsResponse.data.book;
 
                 return {
                   ...userBook,
