@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "assets/img/logo.png";
 import api from "../../api";
-import { useAuth } from "AuthContext";
 import { SearchBar } from "components";
 
 const Header2 = () => {
-  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -15,7 +13,7 @@ const Header2 = () => {
 
       if (response.status === 200) {
         // 로그아웃 성공
-        logout();
+        localStorage.removeItem("authToken");
         // 페이지 이동
         navigate("/");
       } else {

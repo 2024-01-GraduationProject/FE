@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Header2, SearchBar, MainNav } from "components";
-import { useAuth } from "AuthContext";
+import { Header2, MainNav } from "components";
 
 const SearchList = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [searchResults, setSearchResults] = useState([]); // 검색 결과 상태
   const [searchWord, setSearchWord] = useState(""); // 검색어 상태
 
@@ -18,10 +16,6 @@ const SearchList = () => {
     }
   }, [location.state]);
 
-  if (!isAuthenticated) {
-    return <div>로딩 중...</div>; // 로딩 중 메시지 표시
-  }
-
   const hasResults = searchResults.length > 0;
 
   return (
@@ -29,7 +23,6 @@ const SearchList = () => {
       <Header2 />
       <div className="container">
         <MainNav />
-        {/*<hr className="mainview_line" />*/}
         {/* 검색 결과 표시 */}
         <div id="searchResults">
           {hasResults ? (

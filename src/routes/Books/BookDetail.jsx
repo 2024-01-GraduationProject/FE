@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FamousBook, Header2 } from "components";
 import api from "../../api";
-import { useAuth } from "AuthContext";
 
 const BookDetail = () => {
   const { bookId } = useParams(); // URL 파라미터로부터 book_id를 가져옴.
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth(); // 로그인 상태 가져오기
 
   const [book, setBook] = useState(null);
   const [bookCategories, setBookCategories] = useState([]); // 카테고리 배열 추가
@@ -32,10 +30,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     if (userId === null) return; // 사용자 ID가 로드되지 않았으면 아무 작업도 하지 않음
-    if (!isAuthenticated) {
-      navigate("/login"); // 로그인 페이지로 리다이렉트
-      return;
-    }
+
     const fetchBookAndUserbookId = async () => {
       try {
         // 책 정보를 가져오기

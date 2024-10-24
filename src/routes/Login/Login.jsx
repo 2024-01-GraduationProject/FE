@@ -1,18 +1,13 @@
 import React, { useState, useRef } from "react";
 import logo from "assets/img/logo.png";
-
 import { useNavigate } from "react-router-dom";
-
 import api from "../../api";
-import { useAuth } from "AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginCheck, setLoginCheck] = useState(false);
-
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const onEmailHandler = (e) => {
     setEmail(e.target.value);
@@ -37,8 +32,6 @@ const Login = () => {
         setLoginCheck(false);
         const { token } = response.data;
         localStorage.setItem("authToken", token);
-        // AuthContext의 login 함수 호출
-        await login(token);
         navigate("/mainview");
       } else {
         // 로그인 실패 시

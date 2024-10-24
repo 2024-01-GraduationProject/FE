@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "AuthContext";
 import api from "../../api";
 
 const RecommendBook = () => {
@@ -8,7 +7,6 @@ const RecommendBook = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [nickname, setNickname] = useState("");
-  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "assets/img/logo.png";
 import api from "../../api"; // Axios 인스턴스 import
-import { useAuth } from "AuthContext";
 
 const Taste = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
 
   // Join에서 이메일 값 받아오기
   const location = useLocation();
@@ -22,12 +20,6 @@ const Taste = () => {
   const [bookCategoryOptions, setBookCategoryOptions] = useState([]);
 
   useEffect(() => {
-    // 인증되지 않은 사용자가 접근할 수 없도록 리디렉션
-    if (!isAuthenticated) {
-      navigate("/login");
-      return;
-    }
-
     // 연령 데이터 가져오기
     const fetchAges = async () => {
       try {

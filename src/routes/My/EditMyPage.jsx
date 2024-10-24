@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header2 } from "components";
-import { FaCamera } from "react-icons/fa";
 import boogi3 from "../../assets/img/boogi3.jpg";
 import api from "../../api";
-import { useAuth } from "AuthContext";
 
 const EditMyPage = () => {
   const navigate = useNavigate();
@@ -20,7 +18,6 @@ const EditMyPage = () => {
   const [isPasswordVerified, setIsPasswordVerified] = useState(false);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState(false);
   const [initialData, setInitialData] = useState({});
-  const { isAuthenticated } = useAuth(); // 로그인 여부
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -81,11 +78,6 @@ const EditMyPage = () => {
   };
 
   const handleSave = async () => {
-    if (!isAuthenticated) {
-      alert("로그인이 필요합니다.");
-      return;
-    }
-
     if (!currentPassword) {
       alert("현재 비밀번호를 입력해주세요.");
       return;

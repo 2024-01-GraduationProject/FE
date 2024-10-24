@@ -18,37 +18,34 @@ import {
 } from "routes";
 import { SearchList } from "components";
 import MainView from "views/MainView";
-import { AuthProvider } from "./AuthContext";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/mylib" element={<MyLib />} />
-          <Route path="/taste" element={<Taste />} />
-          <Route path="/mainview" element={<MainView />} />
-          <Route path="/homeview" element={<HomeView />} />
-          <Route path="/editmypage" element={<EditMyPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/tastenext" element={<TasteNext />} />
-          <Route path="/books/details/:bookId" element={<BookDetail />} />
-          <Route
-            path="/books/category/:categoryName"
-            element={<BookCategory />}
-          />
-          <Route path="/books/:bookId/content" element={<BookReader />} />
-          <Route path="/books/:bookId/boogi" element={<BoogiChatbot />} />
-          <Route path="/searchlist" element={<SearchList />} />
-          <Route
-            path="/boogi/answers/:userId/:bookId"
-            element={<CompletedBoogi />}
-          />
-        </Routes>
-      </AuthProvider>
+      <Routes>
+        <Route path="/" element={<HomeView />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/mylib" element={<MyLib />} />
+        <Route path="/taste" element={<Taste />} />
+        <Route path="/mainview" element={<MainView />} />
+        <Route path="/homeview" element={<HomeView />} />
+        <Route path="/editmypage" element={<EditMyPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/tastenext" element={<TasteNext />} />
+        <Route path="/books/details/:bookId" element={<BookDetail />} />
+        <Route
+          path="/books/category/:categoryName"
+          element={<BookCategory />}
+        />
+        <Route path="/books/:bookId/content" element={<BookReader />} />
+        <Route path="/books/:bookId/boogi" element={<BoogiChatbot />} />
+        <Route path="/searchlist" element={<SearchList />} />
+        <Route
+          path="/boogi/answers/:userId/:bookId"
+          element={<CompletedBoogi />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 };

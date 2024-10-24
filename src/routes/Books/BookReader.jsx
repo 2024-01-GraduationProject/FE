@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import ePub from "epubjs";
 import api from "../../api";
 import { debounce } from "debounce";
-import { useAuth } from "../../AuthContext";
 import {
   FaRegArrowAltCircleLeft,
   FaBookmark,
@@ -26,7 +25,6 @@ const BookReader = () => {
   const [isBookReady, setIsBookReady] = useState(false);
   const [bookTitle, setBookTitle] = useState(""); // 책 제목 상태 추가
   const [bookAuthor, setBookAuthor] = useState("");
-  const { isAuthenticated, logout } = useAuth();
   const [lastReadCFI, setLastReadCFI] = useState(null);
   const [isBookCompleted, setIsBookCompleted] = useState(false); // 책 완독 상태 추가
   const navigate = useNavigate();
@@ -48,12 +46,10 @@ const BookReader = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const token = localStorage.getItem("authToken"); // 저장된 토큰 확인
         const response = await api.get(`/books/${bookId}/content`, {
           responseType: "arraybuffer",
           headers: {
             Accept: "application/epub+zip",
-            Authorization: `Bearer ${token}`, // Bearer 토큰 추가
           },
         });
 
@@ -303,7 +299,7 @@ const BookReader = () => {
   // 진도율이 변경될 때마다 저장하는 로직 추가
   useEffect(() => {
     const saveProgress = async () => {
-      if (progress > 0 && isAuthenticated && userId) {
+      if (progress > 0 && userId) {
         try {
           // 확인: 데이터가 올바른 형식인지 검토
 
@@ -337,13 +333,13 @@ const BookReader = () => {
     };
 
     saveProgress();
-  }, [progress, isAuthenticated, userId, bookId]);
+  }, [progress, userId, bookId]);
 
   // 창을 나가기 전 또는 로그아웃 시 진도율 저장
   useEffect(() => {
     // `beforeunload` 이벤트 핸들러
     const handleBeforeUnload = () => {
-      if (progress > 0 && isAuthenticated && userId) {
+      if (progress > 0 && userId) {
         const lastReadPage = (progress / 100) * 100;
 
         const url = new URL(`/bookshelf/completeBook`, window.location.origin);
@@ -366,7 +362,7 @@ const BookReader = () => {
 
     // 로그아웃 시 호출될 함수
     const wrappedLogout = async () => {
-      if (progress > 0 && isAuthenticated && userId) {
+      if (progress > 0 && userId) {
         const lastReadPage = (progress / 100) * 100;
         try {
           await api.put(`/bookshelf/completeBook`, null, {
@@ -400,7 +396,7 @@ const BookReader = () => {
           console.error("Error saving progress before logout:", error);
         }
       }
-      logout(); // 실제 로그아웃 수행
+      localStorage.removeItem("authToken"); // 실제 로그아웃 수행
     };
 
     // 이벤트 리스너 등록
@@ -410,7 +406,7 @@ const BookReader = () => {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [progress, indexes, isAuthenticated, userId, bookId, logout]);
+  }, [progress, indexes, userId, bookId]);
 
   const handleNextPage = () => {
     if (rendition) {

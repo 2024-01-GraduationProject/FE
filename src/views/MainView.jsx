@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import {
   Header2,
   MainNav,
@@ -8,16 +7,8 @@ import {
   FamousBook,
   RecommendBook,
 } from "components";
-import { useAuth } from "AuthContext";
 
 const MainView = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-
-  if (!isAuthenticated) {
-    return <div>로딩 중...</div>; // 로딩 중 메시지 표시
-  }
-
   return (
     <>
       <Header2 />
